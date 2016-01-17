@@ -1,0 +1,19 @@
+sensor:
+  build: .
+  dockerfile: Dockerfile.sensor
+  net: host
+  privileged: true
+  volumes:
+    - ./maltrail.conf:/maltrail/maltrail.conf
+
+server:
+  build: .
+  dockerfile: Dockerfile.server
+  ports: 
+    - 8338:8338
+  volumes:
+    - ./maltrail.conf:/maltrail/maltrail.conf
+
+test:
+  image: alpine
+  command: ping -c 1 136.161.101.53

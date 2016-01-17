@@ -1,0 +1,9 @@
+FROM python:2.7
+WORKDIR /maltrail
+
+RUN apt-get update && \
+apt-get install -y python-pcapy && \
+git clone -b 0.9 https://github.com/stamparm/maltrail.git .
+
+EXPOSE 8338
+CMD ["python","server.py"]

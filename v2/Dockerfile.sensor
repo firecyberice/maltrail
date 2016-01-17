@@ -1,0 +1,19 @@
+FROM python:2.7
+WORKDIR /maltrail
+
+RUN apt-get update && \
+apt-get install -y \
+python-dev \
+libpcap-dev \
+pcaputils \
+libpcap0.8 \
+libpcap0.8-dev \
+python-pcapy \
+python-libpcap
+
+RUN \
+pip install pcapy && \
+git clone -b 0.9 https://github.com/stamparm/maltrail.git .
+
+VOLUME ["/var/log/maltrail"]
+CMD ["python","sensor.py"]
